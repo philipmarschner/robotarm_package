@@ -1,3 +1,4 @@
+/home/phmar/Documents/robotarm_package/install/robotarm_package/lib/robotarm_package/image_subscriber
 /home/phmar/Documents/robotarm_package/install/robotarm_package/share/ament_index/resource_index/package_run_dependencies/robotarm_package
 /home/phmar/Documents/robotarm_package/install/robotarm_package/share/ament_index/resource_index/parent_prefix_path/robotarm_package
 /home/phmar/Documents/robotarm_package/install/robotarm_package/share/robotarm_package/environment/ament_prefix_path.sh

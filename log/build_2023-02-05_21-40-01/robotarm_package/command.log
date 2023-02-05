@@ -1,0 +1,4 @@
+Invoking command in '/home/phmar/Documents/robotarm_package/build/robotarm_package': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/phmar/Documents/robotarm_package/build/robotarm_package -- -j8 -l8
+Invoked command in '/home/phmar/Documents/robotarm_package/build/robotarm_package' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/phmar/Documents/robotarm_package/build/robotarm_package -- -j8 -l8
+Invoking command in '/home/phmar/Documents/robotarm_package/build/robotarm_package': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/phmar/Documents/robotarm_package/build/robotarm_package
+Invoked command in '/home/phmar/Documents/robotarm_package/build/robotarm_package' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/phmar/Documents/robotarm_package/build/robotarm_package

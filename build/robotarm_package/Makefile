@@ -197,6 +197,43 @@ robotarm_package_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/robotarm_package_uninstall.dir/build.make CMakeFiles/robotarm_package_uninstall.dir/build
 .PHONY : robotarm_package_uninstall/fast
 
+#=============================================================================
+# Target rules for targets named image_subscriber
+
+# Build rule for target.
+image_subscriber: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 image_subscriber
+.PHONY : image_subscriber
+
+# fast build rule for target.
+image_subscriber/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/image_subscriber.dir/build.make CMakeFiles/image_subscriber.dir/build
+.PHONY : image_subscriber/fast
+
+src/image_subscriber.o: src/image_subscriber.cpp.o
+.PHONY : src/image_subscriber.o
+
+# target to build an object file
+src/image_subscriber.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/image_subscriber.dir/build.make CMakeFiles/image_subscriber.dir/src/image_subscriber.cpp.o
+.PHONY : src/image_subscriber.cpp.o
+
+src/image_subscriber.i: src/image_subscriber.cpp.i
+.PHONY : src/image_subscriber.i
+
+# target to preprocess a source file
+src/image_subscriber.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/image_subscriber.dir/build.make CMakeFiles/image_subscriber.dir/src/image_subscriber.cpp.i
+.PHONY : src/image_subscriber.cpp.i
+
+src/image_subscriber.s: src/image_subscriber.cpp.s
+.PHONY : src/image_subscriber.s
+
+# target to generate assembly for a file
+src/image_subscriber.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/image_subscriber.dir/build.make CMakeFiles/image_subscriber.dir/src/image_subscriber.cpp.s
+.PHONY : src/image_subscriber.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +249,10 @@ help:
 	@echo "... test"
 	@echo "... robotarm_package_uninstall"
 	@echo "... uninstall"
+	@echo "... image_subscriber"
+	@echo "... src/image_subscriber.o"
+	@echo "... src/image_subscriber.i"
+	@echo "... src/image_subscriber.s"
 .PHONY : help
 
 
