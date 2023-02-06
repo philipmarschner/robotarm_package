@@ -1,5 +1,5 @@
 # robotarm_package
-
+NB: This ros workspace was stupidly called a package even though it is a ws
 # Prerequisits
 Ros foxy (ubuntu 20.04)
 $sudo apt install ros-foxy-usb-cam
