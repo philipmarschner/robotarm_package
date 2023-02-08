@@ -43,6 +43,15 @@ class ImageSubscriber : public rclcpp::Node
 			std::vector<float>vec(img.begin<float>(), img.end<float>());
 
 			// Stream image (vec) to FPGA
+
+			//write data to bram
+
+			//wait for response
+
+			//read data from bram
+
+			//write to dynamixel topic
+
 		}
 
 };
