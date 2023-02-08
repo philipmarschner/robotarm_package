@@ -5,7 +5,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-include(${CMAKE_SOURCE_DIR}/cmake/Modules/FindDynamixelSDK.cmake)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -15,23 +14,22 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(dynamixel_sdk REQUIRED)
-find_package(dynamixel_sdk_custom_interface REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(rcutils REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(rcutils REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(dynamixel_sdk_custom_interfaces REQUIRED)
 
+#find_package(rosidl_default_generators REQUIRED)
+#rosidl_generate_interfaces(${PROJECT_NAME}
+#  "msg/SetPosition.msg"
+# )
+#ament_export_dependencies(rosidl_default_runtime)
 
-add_executable(bram_node src/bram_node.cpp)
-ament_target_dependencies(bram_node rclcpp std_msgs geometry_msgs)
-add_executable(controller_node src/controller_node.cpp)
-ament_target_dependencies(controller_node rclcpp geometry_msgs dynamixel_sdk_custom_interface)
 add_executable(image_subscriber src/image_subscriber.cpp)
-ament_target_dependencies(image_subscriber sensor_msgs rclcpp cv_bridge OpenCV)
-add_executable(read_write_node src/read_write_node.cpp)
-ament_target_dependencies(read_write_node rclcpp dynamixel_sdk dynamixel_sdk_custom_interface rcutils)
+ament_target_dependencies(image_subscriber dynamixel_sdk_custom_interfaces sensor_msgs rclcpp cv_bridge OpenCV)
+
 
 # Dont know if this is needed??
 #target_include_directories(image_publisher PUBLIC
@@ -40,10 +38,7 @@ ament_target_dependencies(read_write_node rclcpp dynamixel_sdk dynamixel_sdk_cus
 #target_compile_features(image_publisher PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 
 install(TARGETS
-  bram_node
-  controller_node
   image_subscriber
-  read_write_node
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
