@@ -27,7 +27,7 @@ find_package(dynamixel_sdk_custom_interfaces REQUIRED)
 # )
 #ament_export_dependencies(rosidl_default_runtime)
 
-add_executable(image_subscriber src/image_subscriber.cpp)
+add_executable(image_subscriber src/image_subscriber.cpp src/bram_uio.hpp src/bram_uio.cpp)
 ament_target_dependencies(image_subscriber dynamixel_sdk_custom_interfaces sensor_msgs rclcpp cv_bridge OpenCV)
 
 
