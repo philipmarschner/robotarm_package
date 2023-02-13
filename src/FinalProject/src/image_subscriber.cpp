@@ -5,21 +5,32 @@
 //#include "dynamixel_sdk_custom_interfaces/srv/get_position.hpp"
 #include <chrono>
 #include <thread>
+#include <stdio.h>
+#include <math.h>
 
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/opencv.hpp>
 using SetPosition = dynamixel_sdk_custom_interfaces::msg::SetPosition;
 
-#define A_id  1
-#define a_low  200
-#define a_middle  350
-#define a_high  500
+// Motor id 
+#define A_id 1
+#define B_id 10
 
-#define B_id  10
-#define b_low  250
-#define b_middle  300
-#define b_high  500
-#define sleep_time  100
+// pnt 1
+#define x1 
+#define y1
+// pnt 2 
+#define x2 
+#define y2
+// pnt 3 
+#define x3 
+#define y3 
+
+// link lenghts ˝given in cm˝
+#define L1 15
+#define L2 15
+
+#define PI 3.14159265 
 
 struct motor_pose
 {
@@ -30,6 +41,13 @@ struct motor_pose
 };
 
 
+struct pose
+{
+	x;
+	y;
+	q1;
+	q2;
+};
 
 
 
@@ -51,31 +69,68 @@ class ImageSubscriber : public rclcpp::Node
 			pos_est_pub_ = this->create_publisher<SetPosition>("/set_position", 10);
 
 		}
+		void calc_forward_kin(float q1, float q2){
+	
+			int x = L1*std::cos(q1) + L2*std::cos(q1+q2);
+			int y = L1*std::sin(q1) + L2*std::sin(q1+q2);
+			
+			std::cout << "x: " << x << " y: " << y << "\n";
 
+		};
+
+
+		void calc_inverse_kin(pose pt){
+			
+			
+			// calc q2
+			float t1 = std::pow(pt.x , 2) + std::pow(pt.y , 2) - std::pow(L1 ,2) - std::pow(L2 ,2);
+			float b1 = 2*L1*L2;
+			pt.q2 = std::acos((t1)/(b1));
+			
+			// calc q1
+			float t2 = L2*std::sin(pt.q2);
+			float b2 = L1+L2*std::cos(pt.q2);
+			pt.q1 = std::atan(pt.y/pt.x) - std::atan(t2/b2);
+
+		};
+
+		int calc_encoder_position(float ang){
+			int pos;
+			float ang_res = 0.3;
+			return pos = (int)*ang/ang_res;
+		};
 		
 		void Set_motor_position(int label){
 
 
+		    pose pos;
 			motor_pose m_position;
 			m_position.a_id = A_id; // motor id 
 			m_position.b_id = B_id; // motor id
 
-			if (label == 1)
+			if (msg->data[0] == 1)
 			{
-				m_position.a_pos_val = a_low;
-				m_position.b_pos_val = b_low;
+				pos.x = x1;
+				pos.y = y1;
+			
 			};
-			if (label == 2)
+			if (msg->data[0] == 2)
 			{
-				m_position.a_pos_val = a_middle;
-				m_position.b_pos_val = b_middle;
+				pos.x = x2;
+				pos.y = y2;
+			
 			};
-			if (label == 3)
+			if (msg->data[0] == 3)
 			{
-				m_position.a_pos_val = a_high;
-				m_position.b_pos_val = b_high;
+				pos.x = x3;
+				pos.y = y3;
+			
 			};
 			
+			calc_inverse_kin(pos);
+
+			m_position.a_pos_val = calc_encoder_position(pos.q1);
+			m_position.b_pos_val = calc_encoder_position(pos.q2);
 
 			publish_motor_position(m_position);
 
