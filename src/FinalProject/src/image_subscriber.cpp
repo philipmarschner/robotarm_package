@@ -43,10 +43,10 @@ struct motor_pose
 
 struct pose
 {
-	x;
-	y;
-	q1;
-	q2;
+    int x;
+    int y;
+    float q1;
+    float q2;
 };
 
 
